@@ -1,4 +1,7 @@
 package model;
+
+import java.util.ArrayList;
+
 public class Customers {
 	//Attributes
 	private String name = "";
@@ -7,6 +10,8 @@ public class Customers {
 	private String direction = "";
 	private String phone = "";
 	private String observations = "";
+	//Relations
+	private ArrayList<Order> order;
 	//Methods
 	public Customers(String pName, String pLastName, String pId, String pDirection, String pPhone, String pObservations) {
 		name = pName;
@@ -15,6 +20,7 @@ public class Customers {
 		direction = pDirection;
 		phone = pPhone;
 		observations = pObservations;
+		order = new ArrayList<Order>();
 	}
 	public String getName() {
 		return name;

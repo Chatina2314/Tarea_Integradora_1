@@ -11,8 +11,8 @@
    <children>
       <TableView prefHeight="307.0" prefWidth="495.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Name" />
           <TableColumn prefWidth="88.0" text="Last Name" />
+          <TableColumn prefWidth="75.0" text="Name" />
             <TableColumn prefWidth="64.0" text="Id" />
             <TableColumn prefWidth="85.0" text="Direction" />
             <TableColumn prefWidth="79.0" text="Phone" />
