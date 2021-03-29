@@ -317,5 +317,51 @@ public class Controller {
 
 		return alert.showAndWait();
 	}
+	@SuppressWarnings("resource")
+	@FXML
+    private void exportClientSet(ActionEvent event) {
+    	
+    	try {
+    		FileWriter writer = new FileWriter("Clientes.csv");
+        	String header = "Name LastName ID Address Phone Observation";
+			writer.write(header);
+			writer.write(clients.toString());
+			writer.close();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    }
 
+    @FXML
+    private void exportOrderSet(ActionEvent event) {
+
+       	
+    	try {
+    		FileWriter writer = new FileWriter("Ordenes.csv");
+        	String header = "";
+			writer.write(header);
+			writer.write(clients.toString());
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    private void exportProductSet(ActionEvent event) {
+       	
+    	try {
+    		FileWriter writer = new FileWriter("Productos.csv");
+        	String header = "";
+			writer.write(header);
+			writer.write(clients.toString());
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    }
 }
