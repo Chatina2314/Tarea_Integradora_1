@@ -1,93 +1,189 @@
 package model;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Order {
-	//Attributes
-	private int code = 0;
-	private String products = "";
-	private int quantity = 0;
-	private String customer = "";
-	private String employeeCharge = "";
-	private String date = "";
-	private String hour = "";
-	private String observations = "";
-	//Relations
-	private Condition conditions;
-	//Methods
-    public Order(int pCode, String pProducts, int pQuantity, String pCustomer, String pEmployeeCharge, String pDate, String pHour, String pObservations, int pConditions) {
-    	code = pCode;
-    	products = pProducts;
-    	quantity = pQuantity;
-    	customer = pCustomer;
-    	employeeCharge = pEmployeeCharge;
-    	date = pDate;
-    	hour = pHour;
-    	observations = pObservations;
-    }
-    public Condition getConditions() {
-		return conditions;
-	}
-	public void setConditions(int pConditions) {
-		if(pConditions==1) {
-    		conditions = Condition.REQUESTED;
-    	}
-    	else if(pConditions==2) {
-    		conditions = Condition.IN_PROCES;
-    	}
-    	else if(pConditions==3) {
-    		conditions = Condition.SENT;
-    	}
-    	else if(pConditions==4) {
-    		conditions = Condition.DELIVERED;
-    	}
-    	else if(pConditions==5) {
-    		conditions = Condition.CANCELED;
-    	}
-	}
-	public int getCode() {
-		return code;
-	}
-	public void setCode(int code) {
+
+	public final static String SOLICITADO = "Solicitado";
+	public final static String EN_PROCESO = "En Proceso";
+	public final static String ENVIADO = "Enviado";
+	public final static String ENTREGADO = "Entregado";
+	
+	private int code;
+	private int state;
+	private ArrayList<Product> products;
+	private int productsQuantity;
+	private Client client;
+	private Employee  employee;
+	private Date dateRequest;
+	private String observations;
+	
+
+
+	public Order(int code, int state, ArrayList<Product> products, int productsQuantity, Client client,
+			Employee employee, Date dateRequest, String observations) {
+
 		this.code = code;
-	}
-	public String getProducts() {
-		return products;
-	}
-	public void setProducts(String products) {
+		this.state = state;
 		this.products = products;
+		this.productsQuantity = productsQuantity;
+		this.client = client;
+		this.employee = employee;
+		this.dateRequest = dateRequest;
+		this.observations = observations;
 	}
-	public int getQuantity() {
-		return quantity;
+
+	
+	public int getProductsQuantity() {
+		return productsQuantity;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+
+
+	public void setProductsQuantity(int productsQuantity) {
+		this.productsQuantity = productsQuantity;
 	}
-	public String getCustomer() {
-		return customer;
+
+
+	public Employee getEmployee() {
+		return employee;
 	}
-	public void setCustomer(String customer) {
-		this.customer = customer;
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
-	public String getEmployeeCharge() {
-		return employeeCharge;
+
+
+	public Date getDateRequest() {
+		return dateRequest;
 	}
-	public void setEmployeeCharge(String employeeCharge) {
-		this.employeeCharge = employeeCharge;
+
+
+	public void setDateRequest(Date dateRequest) {
+		this.dateRequest = dateRequest;
 	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getHour() {
-		return hour;
-	}
-	public void setHour(String hour) {
-		this.hour = hour;
-	}
+
+
 	public String getObservations() {
 		return observations;
 	}
+
+
 	public void setObservations(String observations) {
 		this.observations = observations;
 	}
+
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public Date getDate() {
+		return dateRequest;
+	}
+
+	public void setDate(Date dateRequest) {
+		this.dateRequest = dateRequest;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public String getNitRestaurant() {
+		return observations;
+	}
+
+	public void setNitRestaurant(String restaurant) {
+		this.observations = restaurant;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
+	}
+	
+	public String orderState(int state) {
+		String stateReturn="";
+		
+		switch (state) {
+		case 1:
+			stateReturn = SOLICITADO; 
+			break;
+			
+		case 2:
+			stateReturn = EN_PROCESO; 
+			break;
+		case 3:
+			stateReturn = ENVIADO; 
+			break;
+		case 4:
+			stateReturn = ENTREGADO; 
+			break;
+		}
+		
+		
+		return stateReturn;
+	}
+	public String nameState() {
+		String stateReturn="";
+		
+		switch (this.state) {
+		case 1:
+			stateReturn = SOLICITADO; 
+			break;
+			
+		case 2:
+			stateReturn = EN_PROCESO; 
+			break;
+		case 3:
+			stateReturn = ENVIADO; 
+			break;
+		case 4:
+			stateReturn = ENTREGADO; 
+			break;
+		}
+		
+		
+		return stateReturn;
+	}
+	
+	public String showProducts() {
+		String str = "";
+		for(Product e: getProducts()) {
+			str+=e.toString()+"\n";
+		}
+		return str;
+	}
+	
+	@Override
+	public String toString() {
+		String str = "";
+		for(Product e: products) {
+			str += e.getName()+" -- ";
+		}
+		return "Codigo "+code+" ;estado "+nameState()+" ;Fecha "+dateRequest + " ;productos "+str;
+	}
+	
+	
 }
